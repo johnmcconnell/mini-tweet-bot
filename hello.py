@@ -106,11 +106,11 @@ def get_tweet():
 #  */
 @app.route('/api/tweet', methods=['POST'])
 def put_tweet():
-    atweet = request.json['tweet']
+    tweet = request.json['tweet']
     if client:
         data = {'tweet':request.json['tweet']}
         db.create_document(data)
-        return 'your tweet: %s.' % atweet
+        return 'your tweet: %s.' % tweet
     else:
         print('No database')
         return 'your tweet: %s!' % tweet
