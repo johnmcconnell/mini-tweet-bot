@@ -50,7 +50,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script>
-    	//Submit data when enter key is pressed
+    	//Submit name when enter key is pressed
         $('#user_name').keydown(function(e) {
         	var name = $('#user_name').val();
             if (e.which == 13 && name.length > 0) { //catch Enter key
@@ -81,6 +81,41 @@
 
           //Call getNames on page load.
           getNames();
+
+
+    </script>
+    <script>
+    	//Submit tweet when enter key is pressed
+        $('#user_tweet').keydown(function(e) {
+        	var name = $('#user_tweet').val();
+            if (e.which == 13 && tweet.length > 0) { //catch Enter key
+            	//POST request to API to create a new visitor entry in the database
+                $.ajax({
+				  method: "POST",
+				  url: "./api/tweets",
+				  contentType: "application/json",
+				  data: JSON.stringify({tweet: tweet })
+				})
+                .done(function(data) {
+                    $('#response').html(data);
+                    $('#tweetInput').hide();
+                    getTweets();
+                });
+            }
+        });
+
+        //Retreive all the tweets from the database
+        function getTweets(){
+          $.get("./api/tweets")
+              .done(function(data) {
+                  if(data.length > 0) {
+                    $('#databaseTweets').html("Database contents: " + JSON.stringify(data));
+                  }
+              });
+          }
+
+          //Call getTweets on page load.
+          getTweets();
 
 
     </script>
