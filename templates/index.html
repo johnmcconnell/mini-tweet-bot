@@ -87,7 +87,7 @@
     <script>
     	//Submit tweet when enter key is pressed
         $('#user_tweet').keydown(function(e) {
-        	var name = $('#user_tweet').val();
+        	var tweet = $('#user_tweet').val();
             if (e.which == 13 && tweet.length > 0) { //catch Enter key
             	//POST request to API to create a new visitor entry in the database
                 $.ajax({
